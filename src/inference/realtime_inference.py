@@ -14,7 +14,7 @@ IMU 실시간 추론 모듈 (Real-time Inference)
 
 사용 개념
   1) IMURealtimeBuffer: 들어오는 IMU 샘플을 하나씩 넣으면, 200개가
-     모일 때마다 윈도우를 반환한다 (7.5초 간격으로 슬라이딩).
+     모일 때마다 윈도우를 반환한다 (이후 150샘플마다 새 윈도우).
   2) FallActivityInference: 윈도우 1개를 받아 낙상/활동을 예측한다.
 
   실제 사용 흐름:
@@ -34,7 +34,7 @@ from feature_extraction import extract_window
 
 CHANNELS = ['ax', 'ay', 'az', 'gx', 'gy', 'gz', 'accMag']
 WINDOW_LEN = 200          # 100Hz x 2.0초 (학습과 동일)
-SLIDE = 150               # 7.5초마다 갱신 (= 200-50? -> 아래 설명)
+SLIDE = 150               # 150샘플마다 새 윈도우 (50샘플 겹침)
 
 
 # ---------------------------------------------------------------
